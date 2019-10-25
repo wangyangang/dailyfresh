@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style="text-align: center;">
+
+    <h2>Please verify your email address</h2>
+
+    <p>{{ user }},Before you can login, we need you to verify your email address.</p>
+    <p>An email containing verification instructions was sent to <b>{{ user.email }}</b></p>
+    <p>
+        Didn’t get the email? <a href="{% url 'user:send-active-email' %}">重新发送激活邮件</a>or <a href="{% url 'user:login' %}">立即登录</a>.
+    </p>
+
+</div>
+
+</body>
+</html>

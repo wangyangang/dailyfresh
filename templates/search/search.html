@@ -1,0 +1,29 @@
+{% extends 'base_templates/base_no_cart.html' %}
+{% load staticfiles %}
+{% block title %}天天生鲜-搜索{% endblock title %}
+{% block page_title %}搜索{% endblock page_title %}
+{% block body %}
+    <div class="total_count">搜索 <b>{{ query }}</b> 结果如下</div>
+    <ul class="cart_list_th clearfix">
+        <li class="col01">商品名称</li>
+        <li class="col02">商品描述</li>
+        <li class="col03">商品单位</li>
+        <li class="col04">商品价格</li>
+    </ul>
+    <form method="post" action="{% url 'orders:place' %}">
+        {% for sku in page %}
+            <ul class="cart_list_td clearfix">
+                <li class="col01"><input type="hidden" name="sku_ids" value="{{ sku.object.id }}"></li>
+                <li class="col02"><a href="{% url 'goods:detail' sku.object.id %}"><img src="{{ sku.object.image.url }}"></a></li>
+                <li class="col03">{{ sku.object.name }}<br><em>{{ sku.object.price }}元/{{ sku.object.unit }}</em></li>
+                <li class="col04">{{ sku.object.summary }}</li>
+                <li class="col05">{{ sku.object.unit }}</li>
+                <li class="col06">{{ sku.object.price }}元</li>
+            </ul>
+        {% endfor %}
+
+    </form>
+{% endblock body %}
+{% block bottomfiles %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+{% endblock bottomfiles %}
